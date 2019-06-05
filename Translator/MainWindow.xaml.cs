@@ -22,17 +22,44 @@ namespace Translator
     {
 
         YandexTranslator yt;
+        Dictionary<string, string> languages;
 
         public MainWindow()
         {
             InitializeComponent();
-            
             yt = new YandexTranslator();
+            languages = yt.GetLanguages();
+            languageFrom.ItemsSource = languages.Values;
+            languageTo.ItemsSource = languages.Values;
+            languageFrom.SelectedIndex = 69;
+            languageTo.SelectedIndex = 16;
+            text.Text = "Введите текст";
+            translation.Text = "Перевод";
         }
 
         private void textChanged(object sender, TextChangedEventArgs e)
         {
-            
+            string dir;
+            dir = GetDir(languageFrom.Text)+"-";
+            dir += GetDir(languageTo.Text);
+            translation.Text = yt.Translate(text.Text,dir);
+        }
+
+        private string GetDir(string val)
+        {
+            string key = null;
+
+            foreach(KeyValuePair<string, string> pair in languages)
+            {
+                if(pair.Value==val)
+                {
+                    key = pair.Key;
+                    
+                    break;
+                }
+            }
+
+            return key;
         }
 
         private void Switcher_Click(object sender, RoutedEventArgs e)
@@ -44,17 +71,18 @@ namespace Translator
 
         private void textbox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            
+            TextBox[] textboxes = new TextBox[] { text, translation };
 
-            //foreach (RichTextBox r in richTextBoxes)
-            //{
-            //    r.Document.Blocks.Clear();
-            //    r.Document.FontSize = 14;
-            //    r.Foreground = Brushes.Black;
-            //}
+            foreach (TextBox t in textboxes)
+            {
+                t.Clear();
+                t.FontSize = 14;
+                t.Foreground = Brushes.Black;
+                t.TextChanged += new TextChangedEventHandler(textChanged);
+                t.GotKeyboardFocus -= new KeyboardFocusChangedEventHandler(textbox_GotKeyboardFocus);
+            }
+
             
-            text.TextChanged += new TextChangedEventHandler(textChanged);
-            text.GotKeyboardFocus -= new KeyboardFocusChangedEventHandler(textbox_GotKeyboardFocus);
         }
 
         

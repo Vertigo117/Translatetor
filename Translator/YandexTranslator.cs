@@ -34,7 +34,7 @@ namespace Translator
 
                         s = "";
 
-                        foreach (string str in translation.Text)
+                        foreach (string str in translation.text)
                         {
                             s += str;
                         }
@@ -48,6 +48,32 @@ namespace Translator
             else
             {
                 return "";
+            }
+        }
+
+        public Dictionary<string,string> GetLanguages()
+        {
+            WebRequest request = WebRequest.Create("https://translate.yandex.net/api/v1.5/tr.json/getLangs?"
+                + "key=" + key
+                + "&ui=ru");
+
+            WebResponse response = request.GetResponse();
+
+            using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+            {
+                string line;
+
+                if ((line = stream.ReadLine()) != null)
+                {
+                    
+                    Languages languages = JsonConvert.DeserializeObject<Languages>(line);
+
+                    
+
+                    return languages.langs;
+                }
+                else
+                    return null;
             }
         }
     }
