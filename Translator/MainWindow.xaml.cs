@@ -81,6 +81,10 @@ namespace Translator
             var temp = languageFrom.SelectedItem;
             languageFrom.SelectedItem = languageTo.SelectedItem;
             languageTo.SelectedItem = temp;
+
+            var temp2 = text.Text;
+            text.Text = translation.Text;
+            translation.Text = temp2;
         }
 
         private void textbox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -96,7 +100,7 @@ namespace Translator
                 t.GotKeyboardFocus -= new KeyboardFocusChangedEventHandler(textbox_GotKeyboardFocus);
             }
 
-            
+            translation.Background = Brushes.WhiteSmoke;
         }
 
         
