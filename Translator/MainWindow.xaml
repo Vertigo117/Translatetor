@@ -49,9 +49,9 @@
             
         </ComboBox>
         <local:Switcher BorderBrush="Transparent" Background="Transparent" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Click="Switcher_Click"/>
-        <TextBox BorderBrush="Transparent" x:Name="text" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource textBlockStyle}" GotKeyboardFocus="textbox_GotKeyboardFocus"/>
+        <TextBox BorderBrush="Transparent" x:Name="text" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource textBlockStyle}" GotKeyboardFocus="textbox_GotKeyboardFocus" SelectionBrush="Transparent"/>
 
-        <TextBox BorderBrush="Transparent" x:Name="translation" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource textBlockStyle}" GotKeyboardFocus="textbox_GotKeyboardFocus" AutoWordSelection="True" IsReadOnly="True" />
+        <TextBox BorderBrush="Transparent" x:Name="translation" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource textBlockStyle}" GotKeyboardFocus="textbox_GotKeyboardFocus" AutoWordSelection="True" IsReadOnly="True" SelectionBrush="Gray" BorderThickness="1" />
 
     </Grid>
 </Window>
