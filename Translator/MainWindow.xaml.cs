@@ -39,10 +39,24 @@ namespace Translator
 
         private void textChanged(object sender, TextChangedEventArgs e)
         {
+            TranslateAsync();
+        }
+
+        private async void TranslateAsync()
+        {
             string dir;
-            dir = GetDir(languageFrom.Text)+"-";
+            string s=text.Text;
+            dir = GetDir(languageFrom.Text) + "-";
             dir += GetDir(languageTo.Text);
-            translation.Text = yt.Translate(text.Text,dir);
+
+            await Task.Run(() =>
+            {
+                s = yt.Translate(s, dir);
+            });
+
+            translation.Text = s;
+
+
         }
 
         private string GetDir(string val)
