@@ -87,7 +87,7 @@ namespace Translator
                 t.GotKeyboardFocus -= new KeyboardFocusChangedEventHandler(textbox_GotKeyboardFocus);
             }
 
-            
+            translation.Background = Brushes.LightGray;
         }
 
         
